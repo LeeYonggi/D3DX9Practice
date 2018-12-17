@@ -14,7 +14,7 @@ MainProc::~MainProc()
 void MainProc::Init()
 {
 	CAMERAMANAGER->Init();
-	MESHMANAGER->AddMesh("aa");
+	MESHMANAGER->AddMesh("bigship1", "./Resource/bigship1.X");
 }
 
 void MainProc::Update()
@@ -23,7 +23,7 @@ void MainProc::Update()
 
 void MainProc::Render()
 {
-	MESHMANAGER->RenderMesh("aa");
+	MESHMANAGER->RenderMesh("bigship1");
 }
 
 void MainProc::Release()

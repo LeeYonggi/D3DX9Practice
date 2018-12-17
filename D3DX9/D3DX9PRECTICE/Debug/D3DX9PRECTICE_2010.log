@@ -1,5 +1,6 @@
 ﻿  MeshManager.cpp
 D:\Programming\study\D3DX9Prectice\D3DX9\D3DX9PRECTICE\MeshManager.cpp(19): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-D:\Programming\study\D3DX9Prectice\D3DX9\D3DX9PRECTICE\MeshManager.cpp(50): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
-D:\Programming\study\D3DX9Prectice\D3DX9\D3DX9PRECTICE\MeshManager.cpp(81): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\Programming\study\D3DX9Prectice\D3DX9\D3DX9PRECTICE\MeshManager.cpp(53): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
+D:\Programming\study\D3DX9Prectice\D3DX9\D3DX9PRECTICE\MeshManager.cpp(90): warning C4189: 'maxFaces': 지역 변수가 초기화되었으나 참조되지 않았습니다.
+D:\Programming\study\D3DX9Prectice\D3DX9\D3DX9PRECTICE\MeshManager.cpp(107): warning C4018: '<': signed 또는 unsigned가 일치하지 않습니다.
   D3DX9PRECTICE_2010.vcxproj -> D:\Programming\study\D3DX9Prectice\D3DX9\D3DX9PRECTICE\Debug\D3DX9PRECTICE.exe
