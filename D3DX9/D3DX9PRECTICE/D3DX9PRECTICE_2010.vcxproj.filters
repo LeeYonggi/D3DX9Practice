@@ -27,6 +27,9 @@
     <Filter Include="Manager\CameraManager">
       <UniqueIdentifier>{d476215e-137a-434a-88bf-41a3c6cb3890}</UniqueIdentifier>
     </Filter>
+    <Filter Include="D3DUtility">
+      <UniqueIdentifier>{811b32eb-9400-47b5-8094-dff3d09e5d73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -98,6 +101,7 @@
     <ClCompile Include="CameraManager.cpp">
       <Filter>Manager\CameraManager</Filter>
     </ClCompile>
+    <ClCompile Include="d3dUtility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -119,6 +123,7 @@
     <ClInclude Include="CameraManager.h">
       <Filter>Manager\CameraManager</Filter>
     </ClInclude>
+    <ClInclude Include="d3dUtility.h" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

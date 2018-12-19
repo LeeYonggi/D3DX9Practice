@@ -34,16 +34,18 @@ MeshManager::~MeshManager()
 	m_Mesh.clear();
 }
 
-void MeshManager::AddMesh(string str, string route)
+Mesh *MeshManager::AddMesh(string str, string route)
 {
 	auto iter = m_Mesh.find(str);
-	if (iter != m_Mesh.end()) return;
+	if (iter != m_Mesh.end()) return iter->second;
 
 	ID3DXBuffer *mtrlBuff;
 	ID3DXBuffer *adjBuff;
 	Mesh *tempMesh = new Mesh;
+	
+	string temp = route + str;
 
-	D3DXLoadMeshFromXA(route.c_str(), D3DXMESH_MANAGED, DEVICE, &adjBuff,
+	D3DXLoadMeshFromXA(temp.c_str(), D3DXMESH_MANAGED, DEVICE, &adjBuff,
 		&mtrlBuff, NULL, &tempMesh->numMaterial, &tempMesh->mesh);
 
 	D3DXMATERIAL *d3dMaterials = (D3DXMATERIAL*)mtrlBuff->GetBufferPointer();
@@ -60,7 +62,10 @@ void MeshManager::AddMesh(string str, string route)
 		if (d3dMaterials[i].pTextureFilename != NULL &&
 			strlen(d3dMaterials[i].pTextureFilename) > 0)
 		{
-			D3DXCreateTextureFromFileA(DEVICE, d3dMaterials[i].pTextureFilename, &tempMesh->tex[i]);
+			char ctr[128] = {};
+			strcat(ctr, route.c_str());
+			strcat(ctr, d3dMaterials[i].pTextureFilename);
+			D3DXCreateTextureFromFileA(DEVICE, ctr, &tempMesh->tex[i]);
 		}
 	}
 	m_Mesh.insert(make_pair(str, tempMesh));
@@ -89,6 +94,8 @@ void MeshManager::AddMesh(string str, string route)
 
 	int maxFaces = tempMesh->pmesh->GetMaxFaces();
 	tempMesh->pmesh->SetNumFaces(maxFaces);
+
+	return tempMesh;
 }
 
 void MeshManager::RenderMesh(string str)
@@ -96,9 +103,20 @@ void MeshManager::RenderMesh(string str)
 	auto iter = m_Mesh.find(str);
 	if (iter == m_Mesh.end()) return;
 
-	DEVICE->SetRenderState(D3DRS_LIGHTING, true);
-	DEVICE->SetRenderState(D3DRS_AMBIENT, 0xffffffff);
-	DEVICE->SetRenderState(D3DRS_ZENABLE, true);
+	DEVICE->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_POINT);
+
+	D3DXVECTOR3 dir(1.0f, -1.0f, 1.0f);
+	D3DXCOLOR col(1.0f, 1.0f, 1.0f, 1.0f);
+	D3DLIGHT9 light = d3d::InitDirectionalLight(&dir, &col);
+
+	DEVICE->SetLight(0, &light);
+	DEVICE->LightEnable(0, true);
+	DEVICE->SetRenderState(D3DRS_NORMALIZENORMALS, true);
+	DEVICE->SetRenderState(D3DRS_SPECULARENABLE, true);
+
+	//DEVICE->SetRenderState(D3DRS_LIGHTING, true);
+	//DEVICE->SetRenderState(D3DRS_AMBIENT, 0xffffffff);
+	//DEVICE->SetRenderState(D3DRS_ZENABLE, true);
 
 	D3DXMATRIX matS;
 	D3DXMatrixScaling(&matS, 1, 1, 1);
@@ -110,5 +128,10 @@ void MeshManager::RenderMesh(string str)
 		DEVICE->SetTexture(0, iter->second->tex[i]);
 
 		iter->second->pmesh->DrawSubset(i);
+
+		DEVICE->SetMaterial(&d3d::WHITE_MTRL);
+		DEVICE->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+		iter->second->pmesh->DrawSubset(i);
+		DEVICE->SetRenderState(D3DRS_FILLMODE, D3DFILL_SOLID);
 	}
 }

@@ -386,9 +386,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="d3dUtility.cpp" />
     <ClCompile Include="MainProc.cpp" />
     <ClCompile Include="MeshManager.cpp" />
     <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="d3dUtility.h" />
     <ClInclude Include="MeshManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="stdafx.h" />

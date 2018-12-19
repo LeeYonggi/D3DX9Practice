@@ -20,7 +20,7 @@ private:
 	map<string, Mesh*> m_Mesh;
 
 public:
-	void AddMesh(string str, string route);
+	Mesh *AddMesh(string str, string route);
 	void RenderMesh(string str);
 };
 

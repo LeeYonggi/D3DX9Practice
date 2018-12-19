@@ -17,6 +17,8 @@ using namespace std;
 
 //custom
 
+#include "d3dUtility.h"
+
 #include "Singleton.h"
 #include "CameraManager.h"
 #include "MeshManager.h"
