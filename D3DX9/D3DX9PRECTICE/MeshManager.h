@@ -21,6 +21,7 @@ private:
 
 public:
 	Mesh *AddMesh(string str, string route);
+	void CreateBoundingSphere(Mesh *meshinfo, D3DXVECTOR3 *center, float *radius);
 	void RenderMesh(string str);
 };
 

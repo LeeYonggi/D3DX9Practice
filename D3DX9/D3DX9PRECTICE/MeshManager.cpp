@@ -98,6 +98,22 @@ Mesh *MeshManager::AddMesh(string str, string route)
 	return tempMesh;
 }
 
+void MeshManager::CreateBoundingSphere(Mesh *meshinfo, D3DXVECTOR3 *center, float *radius)
+{
+	HRESULT hr;
+	BYTE *v;
+
+	meshinfo->mesh->LockVertexBuffer(0, (void**)&v);
+
+	hr = D3DXComputeBoundingSphere(
+		(D3DXVECTOR3*)v,
+		meshinfo->mesh->GetNumVertices(),
+		D3DXGetFVFVertexSize(meshinfo->mesh->GetFVF()),
+		center,
+		radius);
+
+	meshinfo->mesh->UnlockVertexBuffer();
+}
 void MeshManager::RenderMesh(string str)
 {
 	auto iter = m_Mesh.find(str);

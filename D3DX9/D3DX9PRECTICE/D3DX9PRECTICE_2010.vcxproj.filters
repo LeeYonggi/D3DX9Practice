@@ -101,7 +101,9 @@
     <ClCompile Include="CameraManager.cpp">
       <Filter>Manager\CameraManager</Filter>
     </ClCompile>
-    <ClCompile Include="d3dUtility.cpp" />
+    <ClCompile Include="d3dUtility.cpp">
+      <Filter>D3DUtility</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -123,7 +125,9 @@
     <ClInclude Include="CameraManager.h">
       <Filter>Manager\CameraManager</Filter>
     </ClInclude>
-    <ClInclude Include="d3dUtility.h" />
+    <ClInclude Include="d3dUtility.h">
+      <Filter>D3DUtility</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
