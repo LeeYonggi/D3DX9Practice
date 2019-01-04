@@ -3,11 +3,14 @@
 //
 // Copyright (c) Microsoft Corporation. All rights reserved.
 //--------------------------------------------------------------------------------------
+#define OnD3D9ResetDevice  CopyrightMicrosoftCorporationAllrightsReserved
 #include "DXUT.h"
 #include "resource.h"
 
 
 MainProc main;
+float timeScale = 1.0f;
+
 //--------------------------------------------------------------------------------------
 // Rejects any D3D9 devices that aren't acceptable to the app by returning false
 //--------------------------------------------------------------------------------------
@@ -41,7 +44,7 @@ bool CALLBACK ModifyDeviceSettings( DXUTDeviceSettings* pDeviceSettings, void* p
 HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
                                      void* pUserContext )
 {
-	//_CrtSetBreakAlloc(343);
+	//_CrtSetBreakAlloc(410);
 	main.Init();
     return S_OK;
 }

@@ -30,6 +30,21 @@
     <Filter Include="D3DUtility">
       <UniqueIdentifier>{811b32eb-9400-47b5-8094-dff3d09e5d73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\MeshManager\MeshLoader">
+      <UniqueIdentifier>{faa2f670-8c6c-4994-b2ad-37e494eaa657}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{cc255a05-2b10-42cc-96bf-be5379f11054}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\ObjectManager">
+      <UniqueIdentifier>{a79c9f5f-207d-48aa-8284-354d05c260de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Ground">
+      <UniqueIdentifier>{8a0485eb-9a54-4605-afe4-633cda704a3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player">
+      <UniqueIdentifier>{6d870f51-dace-4c6c-b954-990d1c9e2a5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -104,6 +119,21 @@
     <ClCompile Include="d3dUtility.cpp">
       <Filter>D3DUtility</Filter>
     </ClCompile>
+    <ClCompile Include="MeshLoader.cpp">
+      <Filter>Manager\MeshManager\MeshLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectManager.cpp">
+      <Filter>Manager\ObjectManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Ground.cpp">
+      <Filter>Object\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Object\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -127,6 +157,21 @@
     </ClInclude>
     <ClInclude Include="d3dUtility.h">
       <Filter>D3DUtility</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshLoader.h">
+      <Filter>Manager\MeshManager\MeshLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectManager.h">
+      <Filter>Manager\ObjectManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Ground.h">
+      <Filter>Object\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Object\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

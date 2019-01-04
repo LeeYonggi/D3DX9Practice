@@ -14,12 +14,19 @@ using namespace std;
 #define SCREEN_Y 720.0f
 #define DEVICE DXUTGetD3D9Device()
 #define M_HWND DXUTGetHWND()
+#define ElTime DXUTGetElapsedTime() * timeScale
+
+typedef D3DXVECTOR3 Vector3;
+extern float timeScale;
 
 //custom
 
 #include "d3dUtility.h"
+#include "MeshLoader.h"
 
 #include "Singleton.h"
+#include "Object.h"
+#include "ObjectManager.h"
 #include "CameraManager.h"
 #include "MeshManager.h"
 #include "MainProc.h"

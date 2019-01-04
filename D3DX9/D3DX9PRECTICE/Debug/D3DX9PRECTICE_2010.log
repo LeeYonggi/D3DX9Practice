@@ -1,3 +1,4 @@
-﻿  MainProc.cpp
-D:\Programming\study\D3DX9Prectice\D3DX9\D3DX9PRECTICE\MainProc.cpp(43): warning C4389: '==': signed 또는 unsigned가 일치하지 않습니다.
+﻿  Player.cpp
+D:\Programming\study\D3DX9Prectice\D3DX9\D3DX9PRECTICE\Player.cpp(27): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  C:\Program Files (x86)\Windows Kits\10\Include\10.0.17763.0\ucrt\stdio.h(1774): note: 'sprintf' 선언을 참조하십시오.
   D3DX9PRECTICE_2010.vcxproj -> D:\Programming\study\D3DX9Prectice\D3DX9\D3DX9PRECTICE\Debug\D3DX9PRECTICE.exe

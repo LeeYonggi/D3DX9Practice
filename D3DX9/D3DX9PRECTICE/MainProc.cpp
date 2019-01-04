@@ -1,6 +1,9 @@
 #include "DXUT.h"
 #include "MainProc.h"
 
+#include "Ground.h"
+#include "Player.h"
+
 
 MainProc::MainProc()
 {
@@ -13,7 +16,8 @@ MainProc::~MainProc()
 
 void MainProc::Init()
 {
-	CAMERAMANAGER->Init();
+#pragma region XFile ProgresiveMesh
+	/*
 	mesh = MESHMANAGER->AddMesh("bigship1.X", "./Resource/");
 	
 	sphere = new Mesh;
@@ -28,14 +32,33 @@ void MainProc::Init()
 		&sphere->mesh,
 		0
 	);
+	*/
+#pragma endregion
+
+	CAMERAMANAGER->Init();
+
+	OBJECTMANAGER->AddObject(OBJ_BACKGROUND, new Ground);
+	OBJECTMANAGER->AddObject(OBJ_CHARACTER, new Player);
+
 }
 
 void MainProc::Update()
 {
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+		CAMERAMANAGER->Translate({-1, 0, 0}, {0, 0, 0});
+	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+		CAMERAMANAGER->Translate({1, 0, 0}, {0, 0, 0});
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+		CAMERAMANAGER->Translate({ 0, -1, 0 }, { 0, 0, 0 });
+	if (GetAsyncKeyState(VK_UP) & 0x8000)
+		CAMERAMANAGER->Translate({ 0, 1, 0 }, { 0, 0, 0});
+	OBJECTMANAGER->Update();
 }
 
 void MainProc::Render()
 {
+#pragma region XFile ProgresiveMesh
+	/*
 	int numFaces = mesh->pmesh->GetNumFaces();
 	if (GetAsyncKeyState('A') & 0x8000)
 	{
@@ -54,24 +77,22 @@ void MainProc::Render()
 	DEVICE->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 	
 	sphere->mesh->DrawSubset(0);
+	*/
+#pragma endregion
+
+	DEVICE->SetRenderState(D3DRS_LIGHTING, true);
+
+	OBJECTMANAGER->Render();
 }
 
 void MainProc::Release()
 {
-	sphere->mesh->Release();
+	ObjectManager::ReleaseInstance();
 	CameraManager::ReleaseInstance();
 	MeshManager::ReleaseInstance();
 }
 
-void MainProc::ClockInit()
+void MainProc::ResetDevice()
 {
 
-}
-
-void MainProc::ClockUpdate()
-{
-}
-
-void MainProc::ClockRender()
-{
 }
