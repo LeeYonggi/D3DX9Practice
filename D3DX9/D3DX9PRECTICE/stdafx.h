@@ -27,6 +27,7 @@ extern float timeScale;
 #include "Singleton.h"
 #include "Object.h"
 #include "ObjectManager.h"
+#include "InputManager.h"
 #include "CameraManager.h"
 #include "MeshManager.h"
 #include "MainProc.h"

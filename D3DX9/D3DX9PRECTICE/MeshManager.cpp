@@ -149,9 +149,9 @@ void MeshManager::RenderMesh(MeshLoader * meshLoader, D3DXVECTOR3 pos, D3DXVECTO
 	D3DXMATRIX matW, matS, matRX, matRY, matRZ, matT;
 
 	D3DXMatrixScaling(&matS, scale.x, scale.y, scale.z);
-	D3DXMatrixRotationX(&matRX, rotation.x);
-	D3DXMatrixRotationY(&matRY, rotation.y);
-	D3DXMatrixRotationZ(&matRZ, rotation.z);
+	D3DXMatrixRotationX(&matRX, D3DXToRadian(rotation.x));
+	D3DXMatrixRotationY(&matRY, D3DXToRadian(rotation.y));
+	D3DXMatrixRotationZ(&matRZ, D3DXToRadian(rotation.z));
 	D3DXMatrixTranslation(&matT, pos.x, pos.y, pos.z);
 
 	matRX = matRX * matRY * matRZ;

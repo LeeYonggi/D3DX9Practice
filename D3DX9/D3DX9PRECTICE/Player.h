@@ -9,6 +9,7 @@ public:
 
 private:
 	vector<MeshLoader*> m_AnimeMesh;
+	int maxFrame;
 	float animeTime;
 
 public:

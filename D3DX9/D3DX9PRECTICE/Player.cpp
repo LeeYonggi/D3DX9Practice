@@ -13,9 +13,10 @@ Player::~Player()
 
 void Player::Init()
 {
-	pos = { 0, 0, 0 };
+	pos = { -60, 0, 0 };
 	rotation = { 0, 180, 0 };
-	for (int i = 0; i < 37; i++)
+	maxFrame = 1;
+	for (int i = 0; i < maxFrame; i++)
 	{
 		string str;
 		wstring wstr = L"./Resource/Character/Walk/Walk";
@@ -29,14 +30,15 @@ void Player::Init()
 		m_AnimeMesh.push_back(MESHMANAGER->AddObjMesh("Character" + str, wstr.c_str()));
 	}
 
-	CAMERAMANAGER->SetPosition({0, 3, 3}, {0, 0, 0});
+	CAMERAMANAGER->SetPosition(Vector3(0, 5, 0) + pos, pos);
 	animeTime = 0.0f;
 }
 
 void Player::Update()
 {
+	CAMERAMANAGER->RotationToChar(this);
 	animeTime += ElTime * 25;
-	if (animeTime > 37)
+	if (animeTime > maxFrame)
 		animeTime = 0.0f;
 }
 

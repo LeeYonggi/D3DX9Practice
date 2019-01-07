@@ -386,8 +386,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CameraManager.cpp" />
+    <ClCompile Include="Cameras.cpp" />
     <ClCompile Include="d3dUtility.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MainProc.cpp" />
     <ClCompile Include="MeshLoader.cpp" />
     <ClCompile Include="MeshManager.cpp" />
@@ -395,8 +397,10 @@
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClInclude Include="CameraManager.h" />
+    <ClInclude Include="Cameras.h" />
     <ClInclude Include="d3dUtility.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="MeshLoader.h" />
     <ClInclude Include="MeshManager.h" />
     <ClInclude Include="Object.h" />

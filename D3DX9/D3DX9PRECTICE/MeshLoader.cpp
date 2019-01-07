@@ -24,7 +24,6 @@ MeshLoader::MeshLoader()
 
 MeshLoader::~MeshLoader()
 {
-	Destroy();
 }
 
 HRESULT MeshLoader::Create(IDirect3DDevice9 * pd3dDevice, const WCHAR * strFilename)
