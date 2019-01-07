@@ -10,6 +10,8 @@ public:
 private:
 	Object *target;
 	float distance;
+	D3DXVECTOR2 current;
+	D3DXQUATERNION prevQ;
 
 public:
 	virtual void CamUpdate() override;
