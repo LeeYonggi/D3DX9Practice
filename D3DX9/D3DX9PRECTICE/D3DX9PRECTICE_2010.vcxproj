@@ -386,7 +386,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CameraManager.cpp" />
-    <ClCompile Include="Cameras.cpp" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="d3dUtility.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -396,8 +396,9 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="TpCamera.cpp" />
     <ClInclude Include="CameraManager.h" />
-    <ClInclude Include="Cameras.h" />
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="d3dUtility.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="InputManager.h" />
@@ -408,6 +409,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TpCamera.h" />
     <None Include="DXUT\Optional\directx.ico" />
     <ClInclude Include="DXUT\Core\DXUT.h" />
     <ClInclude Include="DXUT\Core\DXUTenum.h" />

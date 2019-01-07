@@ -146,7 +146,12 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Manager\InputManager</Filter>
     </ClCompile>
-    <ClCompile Include="Cameras.cpp" />
+    <ClCompile Include="Camera.cpp">
+      <Filter>Manager\CameraManager\Cameras</Filter>
+    </ClCompile>
+    <ClCompile Include="TpCamera.cpp">
+      <Filter>Manager\CameraManager\Cameras\TpCamera</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -189,7 +194,12 @@
     <ClInclude Include="InputManager.h">
       <Filter>Manager\InputManager</Filter>
     </ClInclude>
-    <ClInclude Include="Cameras.h" />
+    <ClInclude Include="Camera.h">
+      <Filter>Manager\CameraManager\Cameras</Filter>
+    </ClInclude>
+    <ClInclude Include="TpCamera.h">
+      <Filter>Manager\CameraManager\Cameras\TpCamera</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

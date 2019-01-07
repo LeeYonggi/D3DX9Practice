@@ -35,7 +35,6 @@ void MainProc::Init()
 	*/
 #pragma endregion
 
-	CAMERAMANAGER->Init();
 
 	OBJECTMANAGER->AddObject(OBJ_BACKGROUND, new Ground);
 	OBJECTMANAGER->AddObject(OBJ_CHARACTER, new Player);
@@ -44,6 +43,15 @@ void MainProc::Init()
 
 void MainProc::Update()
 {
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+		CAMERAMANAGER->Translate({-1, 0, 0}, { 0, 0, 0 });
+	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+		CAMERAMANAGER->Translate({ 1, 0, 0 }, { 0, 0, 0 });
+	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+		CAMERAMANAGER->Translate({ 0, -1, 0 }, { 0, 0, 0 });
+	if (GetAsyncKeyState(VK_UP	) & 0x8000)
+		CAMERAMANAGER->Translate({ 0, 1, 0 }, { 0, 0, 0 });
+	CAMERAMANAGER->CamUpdate();
 	OBJECTMANAGER->Update();
 	INPUTMANAGER->Update();
 }

@@ -1,5 +1,6 @@
 #include "DXUT.h"
 #include "Player.h"
+#include "TpCamera.h"
 
 
 Player::Player()
@@ -29,14 +30,13 @@ void Player::Init()
 		str = ctr;
 		m_AnimeMesh.push_back(MESHMANAGER->AddObjMesh("Character" + str, wstr.c_str()));
 	}
-
-	CAMERAMANAGER->SetPosition(Vector3(0, 5, 0) + pos, pos);
+	CAMERAMANAGER->Init(new TpCamera(this));
+	CAMERAMANAGER->SetPosition(pos + Vector3(0, 2, 0), pos);
 	animeTime = 0.0f;
 }
 
 void Player::Update()
 {
-	CAMERAMANAGER->RotationToChar(this);
 	animeTime += ElTime * 25;
 	if (animeTime > maxFrame)
 		animeTime = 0.0f;
