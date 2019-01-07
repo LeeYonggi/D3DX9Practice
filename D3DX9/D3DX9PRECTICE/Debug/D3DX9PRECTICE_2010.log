@@ -1,4 +1,0 @@
-﻿  TpCamera.cpp
-D:\Programming\study\D3DX9Prectice\D3DX9\D3DX9PRECTICE\TpCamera.cpp(20): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-D:\Programming\study\D3DX9Prectice\D3DX9\D3DX9PRECTICE\TpCamera.cpp(21): warning C4244: '=': 'float'에서 'LONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  D3DX9PRECTICE_2010.vcxproj -> D:\Programming\study\D3DX9Prectice\D3DX9\D3DX9PRECTICE\Debug\D3DX9PRECTICE.exe
