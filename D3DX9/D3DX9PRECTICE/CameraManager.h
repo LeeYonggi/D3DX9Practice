@@ -19,6 +19,9 @@ public:
 	void SetCamera();
 	void CamUpdate();
 	void RotationToChar(Object *obj);
+
+	Vector3 GetEye() { if(nowCamera) return nowCamera->GetEye(); }
+	Vector3 GetAt()	 { if(nowCamera) return nowCamera->GetAt(); }
 };
 
 #define CAMERAMANAGER CameraManager::GetInstance()

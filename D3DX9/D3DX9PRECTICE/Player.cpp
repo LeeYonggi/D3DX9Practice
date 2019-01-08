@@ -31,7 +31,6 @@ void Player::Init()
 		m_AnimeMesh.push_back(MESHMANAGER->AddObjMesh("Character" + str, wstr.c_str()));
 	}
 	CAMERAMANAGER->Init(new TpCamera(this));
-	CAMERAMANAGER->SetPosition(pos + Vector3(0, 2, 0), pos);
 	animeTime = 0.0f;
 }
 
@@ -40,6 +39,12 @@ void Player::Update()
 	animeTime += ElTime * 25;
 	if (animeTime > maxFrame)
 		animeTime = 0.0f;
+
+	D3DXVECTOR2 distance;
+	distance.x = CAMERAMANAGER->GetAt().x - CAMERAMANAGER->GetEye().x;
+	distance.y = CAMERAMANAGER->GetAt().z - CAMERAMANAGER->GetEye().z;
+
+	rotation.y = D3DXToDegree(-atan2f(distance.y, distance.x)) -  90;
 }
 
 void Player::Render()

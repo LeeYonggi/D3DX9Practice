@@ -15,5 +15,8 @@ public:
 	void SetCamera(Vector3 eye, Vector3 at);
 	virtual void CamUpdate() PURE;
 
+	D3DXVECTOR3 GetEye() { return m_Eye; }
+	D3DXVECTOR3 GetAt() { return m_At; }
+	D3DXVECTOR3 GetUp() { return m_Up; }
 };
 
