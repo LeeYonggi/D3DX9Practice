@@ -45,6 +45,11 @@ void Player::Update()
 	distance.y = CAMERAMANAGER->GetAt().z - CAMERAMANAGER->GetEye().z;
 
 	rotation.y = D3DXToDegree(-atan2f(distance.y, distance.x)) -  90;
+
+	if (INPUTMANAGER->IsKeyPress(VK_UP))
+	{
+		pos.x++;
+	}
 }
 
 void Player::Render()

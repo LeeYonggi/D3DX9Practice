@@ -19,9 +19,9 @@ public:
 	void Update();
 
 	D3DXVECTOR2 GetCusor() { return cursor; }
-	bool IsKeyDown(int key) { return pastKey[key] == false && nowKey[key] == true ? true : false; }
-	bool IsKeyPress(int key){ return pastKey[key] == true && nowKey[key] == true ? true : false; }
-	bool IsKeyUp(int key)	{ return pastKey[key] == true && nowKey[key] == false ? true : false; }
+	bool IsKeyDown(int key) { return (pastKey[key] == false && nowKey[key] == true) ? true : false; }
+	bool IsKeyPress(int key){ return (pastKey[key] == true && nowKey[key] == true) ? true : false; }
+	bool IsKeyUp(int key)	{ return (pastKey[key] == true && nowKey[key] == false) ? true : false; }
 };
 
 #define INPUTMANAGER InputManager::GetInstance()
