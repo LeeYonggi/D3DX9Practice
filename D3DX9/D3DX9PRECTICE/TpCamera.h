@@ -12,6 +12,8 @@ private:
 	float distance;
 	D3DXVECTOR2 current;
 	D3DXQUATERNION prevQ;
+	float zoomDisX;
+	float zoomDisY;
 
 public:
 	virtual void CamUpdate() override;

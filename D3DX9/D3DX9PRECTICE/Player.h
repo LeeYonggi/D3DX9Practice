@@ -11,6 +11,7 @@ private:
 	vector<MeshLoader*> m_AnimeMesh;
 	int maxFrame;
 	float animeTime;
+	float speed;
 
 public:
 	void Init()		override;

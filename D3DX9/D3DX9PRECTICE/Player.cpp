@@ -46,7 +46,7 @@ void Player::Update()
 
 	rotation.y = D3DXToDegree(-atan2f(distance.y, distance.x)) -  90;
 
-	if (INPUTMANAGER->IsKeyPress(VK_UP))
+	if (INPUTMANAGER->IsKeyPress('W'))
 	{
 		pos.x++;
 	}

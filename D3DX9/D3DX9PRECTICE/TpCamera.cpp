@@ -5,13 +5,16 @@
 TpCamera::TpCamera(Object * _target)
 {
 	target = _target;
-	distance = 5.0f;
 	current = { 0, 0 };
 
 	m_Eye = { 4.0f, 4.0f, -13.0f };
 	
 	prevQ = { 0, 0, 0, 1 };
 	ShowCursor(false);
+
+	distance = 3.5f;
+	zoomDisX = 2;
+	zoomDisY = 2;
 }
 
 TpCamera::~TpCamera()
@@ -66,8 +69,8 @@ void TpCamera::CamUpdate()
 	D3DXVECTOR3 _disFromTarget = m_Eye - target->GetPos();
 	D3DXVec3Normalize(&_disFromTarget, &_disFromTarget);
 	D3DXVec3Cross(&_disFromTarget, &_disFromTarget, &m_Up);
-	m_At = target->GetPos() + _disFromTarget * 2.0f;
-	m_At.y += 1;
+	m_At = target->GetPos() + _disFromTarget * zoomDisX;
+	m_At.y += zoomDisY;
 
 	Camera::Init();
 	SetCursorPos(center.x, center.y);
