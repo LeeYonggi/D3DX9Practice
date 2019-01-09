@@ -3,6 +3,7 @@
 
 #include "Ground.h"
 #include "Player.h"
+#include "SkyBox.h"
 
 
 MainProc::MainProc()
@@ -36,9 +37,9 @@ void MainProc::Init()
 #pragma endregion
 
 
+	OBJECTMANAGER->AddObject(OBJ_BACKGROUND, new SkyBox);
 	OBJECTMANAGER->AddObject(OBJ_BACKGROUND, new Ground);
 	OBJECTMANAGER->AddObject(OBJ_CHARACTER, new Player);
-
 }
 
 void MainProc::Update()
@@ -91,6 +92,7 @@ void MainProc::Release()
 	ObjectManager::ReleaseInstance();
 	CameraManager::ReleaseInstance();
 	MeshManager::ReleaseInstance();
+	TexManager::ReleaseInstance();
 }
 
 void MainProc::ResetDevice()

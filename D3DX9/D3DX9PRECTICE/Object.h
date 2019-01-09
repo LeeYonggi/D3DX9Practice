@@ -8,7 +8,7 @@ public:
 protected:
 	Vector3 pos;
 	Vector3 rotation;
-	Vector3 size;
+	Vector3 scale;
 	MeshLoader *meshLoader;
 
 	bool destroy;
@@ -27,8 +27,8 @@ public:
 	Vector3 GetRotation() { return rotation; }
 	void SetRotation(Vector3 _rotation) { rotation = _rotation; }
 
-	Vector3 GetSize() { return size; }
-	void SetSize(Vector3 _size) { size = _size; }
+	Vector3 GetSize() { return scale; }
+	void SetSize(Vector3 _size) { scale = _size; }
 
 	MeshLoader *GetMeshLoader() { return meshLoader; }
 	void SetMeshLoader(MeshLoader *_meshLoader) { meshLoader = _meshLoader; }

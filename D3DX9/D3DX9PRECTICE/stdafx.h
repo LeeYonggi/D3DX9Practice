@@ -25,6 +25,7 @@ extern float timeScale;
 #include "MeshLoader.h"
 
 #include "Singleton.h"
+#include "TexManager.h"
 #include "Object.h"
 #include "ObjectManager.h"
 #include "InputManager.h"

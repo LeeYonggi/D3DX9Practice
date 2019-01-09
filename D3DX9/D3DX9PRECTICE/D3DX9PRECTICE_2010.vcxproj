@@ -396,6 +396,8 @@
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="TexManager.cpp" />
     <ClCompile Include="TpCamera.cpp" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Camera.h" />
@@ -408,7 +410,9 @@
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="SkyBox.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TexManager.h" />
     <ClInclude Include="TpCamera.h" />
     <None Include="DXUT\Optional\directx.ico" />
     <ClInclude Include="DXUT\Core\DXUT.h" />

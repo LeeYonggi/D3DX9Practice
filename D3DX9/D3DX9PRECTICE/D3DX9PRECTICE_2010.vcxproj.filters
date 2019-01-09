@@ -54,6 +54,12 @@
     <Filter Include="Manager\CameraManager\Cameras\TpCamera">
       <UniqueIdentifier>{612e757c-8ab8-45ef-8a64-4ad6ecd51821}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\SkyBox">
+      <UniqueIdentifier>{ee2b9bfe-a88d-46c7-857e-6702fd0371dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\TexManager">
+      <UniqueIdentifier>{ba6e4050-a124-4afb-b49d-70692a531e94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -152,6 +158,10 @@
     <ClCompile Include="TpCamera.cpp">
       <Filter>Manager\CameraManager\Cameras\TpCamera</Filter>
     </ClCompile>
+    <ClCompile Include="SkyBox.cpp">
+      <Filter>Object\SkyBox</Filter>
+    </ClCompile>
+    <ClCompile Include="TexManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -200,6 +210,10 @@
     <ClInclude Include="TpCamera.h">
       <Filter>Manager\CameraManager\Cameras\TpCamera</Filter>
     </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>Object\SkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="TexManager.h" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
