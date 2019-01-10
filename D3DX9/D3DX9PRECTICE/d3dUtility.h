@@ -24,4 +24,10 @@ namespace d3d
 	const D3DMATERIAL9 GREEN_MTRL = InitMtrl(GREEN, GREEN, GREEN, BLACK, 2.0f);
 	const D3DMATERIAL9 BLUE_MTRL = InitMtrl(BLUE, BLUE, BLUE, BLACK, 2.0f);
 	const D3DMATERIAL9 YELLOW_MTRL = InitMtrl(YELLOW, YELLOW, YELLOW, BLACK, 2.0f);
+
+	template<typename T>
+	T Lerp(const T& p1, const T& p2, float d)
+	{
+		return p1 + (p2 - p1) * d;
+	}
 }

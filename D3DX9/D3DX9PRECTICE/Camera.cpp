@@ -20,9 +20,8 @@ void Camera::Init()
 
 	GetClientRect(M_HWND, &rect);
 
-	D3DXMATRIX vMat;
+	D3DXMATRIX vMat, vMatR;
 	D3DXMatrixLookAtLH(&vMat, &m_Eye, &m_At, &m_Up);
-
 
 	DEVICE->SetTransform(D3DTS_VIEW, &vMat);
 

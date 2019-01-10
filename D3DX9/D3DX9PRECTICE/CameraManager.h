@@ -22,6 +22,8 @@ public:
 
 	Vector3 GetEye() { if(nowCamera) return nowCamera->GetEye(); }
 	Vector3 GetAt()	 { if(nowCamera) return nowCamera->GetAt(); }
+	Vector3 GetUp()  { if(nowCamera) return nowCamera->GetUp(); }
+	Camera *GetCamera() { return nowCamera; }
 };
 
 #define CAMERAMANAGER CameraManager::GetInstance()

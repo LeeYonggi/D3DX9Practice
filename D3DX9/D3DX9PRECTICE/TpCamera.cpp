@@ -1,6 +1,9 @@
 #include "DXUT.h"
 #include "TpCamera.h"
 
+#define ZOOMDISTANCE 2.5f
+#define ZOOMDISTANCEX 3.0f
+#define ZOOMDISTANCEY 1.5f
 
 TpCamera::TpCamera(Object * _target)
 {
@@ -15,6 +18,8 @@ TpCamera::TpCamera(Object * _target)
 	distance = 3.5f;
 	zoomDisX = 2;
 	zoomDisY = 2;
+
+	targetPos = target->GetPos();
 }
 
 TpCamera::~TpCamera()
@@ -22,8 +27,30 @@ TpCamera::~TpCamera()
 
 }
 
+void TpCamera::LerpToTarget()
+{
+	targetPos = d3d::Lerp<Vector3>(targetPos, target->GetPos(), 0.1f);
+
+	distance = d3d::Lerp<float>(distance, 3.5f, 0.1f);
+	zoomDisX = d3d::Lerp<float>(zoomDisX, 2, 0.1f);
+	zoomDisY = d3d::Lerp<float>(zoomDisY, 2, 0.1f);
+}
+
+void TpCamera::LerpToZoom()
+{
+	targetPos = d3d::Lerp<Vector3>(targetPos, target->GetPos(), 0.1f);
+
+	distance = d3d::Lerp<float>(distance, ZOOMDISTANCE, 0.1f);
+	zoomDisX = d3d::Lerp<float>(zoomDisX, ZOOMDISTANCEX, 0.1f);
+	zoomDisY = d3d::Lerp<float>(zoomDisY, ZOOMDISTANCEY, 0.1f);
+}
+
 void TpCamera::CamUpdate()
 {
+	if (INPUTMANAGER->IsKeyPress(VK_RBUTTON))
+		LerpToZoom();
+	else
+		LerpToTarget();
 	RECT screenRe;
 	GetWindowRect(DXUTGetHWND(), &screenRe);
 	POINT center;
@@ -62,14 +89,15 @@ void TpCamera::CamUpdate()
 	D3DXMatrixRotationQuaternion(&mRQ, &prevQ);
 	D3DXVec3TransformCoord(&m_Eye, &m_Eye, &mRQ);
 
-	m_Eye += target->GetPos();
+	m_Eye += targetPos;
 	m_Eye.y += 1;
-	//m_At = target->GetPos();
+	//m_At = targetPos;
 	//m_At.y += 1;
-	D3DXVECTOR3 _disFromTarget = m_Eye - target->GetPos();
+	D3DXVECTOR3 _disFromTarget = m_Eye - targetPos;
+
 	D3DXVec3Normalize(&_disFromTarget, &_disFromTarget);
 	D3DXVec3Cross(&_disFromTarget, &_disFromTarget, &m_Up);
-	m_At = target->GetPos() + _disFromTarget * zoomDisX;
+	m_At = targetPos + _disFromTarget * zoomDisX;
 	m_At.y += zoomDisY;
 
 	Camera::Init();
