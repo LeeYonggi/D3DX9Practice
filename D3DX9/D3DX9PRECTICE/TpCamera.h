@@ -10,6 +10,9 @@ public:
 private:
 	Object *target;
 	Vector3 targetPos;
+	Vector3 smoothPivot;
+	Vector3 fixtargetoffset;
+	Vector3 fixpivotoffset;
 	float distance;
 	D3DXVECTOR2 current;
 	D3DXQUATERNION prevQ;
@@ -19,6 +22,9 @@ private:
 public:
 	void LerpToTarget();
 	void LerpToZoom();
+	D3DXVECTOR2 GetAxisMouse();
+	void QuaternionLerpCam();
+	void TargetOffsetCam();
 	virtual void CamUpdate() override;
 
 public:

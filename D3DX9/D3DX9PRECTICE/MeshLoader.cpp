@@ -437,6 +437,7 @@ HRESULT MeshLoader::LoadMaterialsFromMTL(wstring strFileName)
 			// Texture
 			wstring tempStr;
 			InFile >> tempStr;
+			pMaterial->strTexture = L"";
 			pMaterial->strTexture = tempStr;
 
 			int number = strFileName.rfind('/');

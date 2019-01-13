@@ -88,3 +88,10 @@ vector<Object*>* ObjectManager::GetObjects(OBJ_STATE objState)
 
 	return iter->second;
 }
+
+Object * ObjectManager::GetObjectOfState(OBJ_STATE objState)
+{
+	auto iter = mObj.find(objState);
+	if (iter == mObj.end()) return nullptr;
+	return (*iter->second)[0];
+}

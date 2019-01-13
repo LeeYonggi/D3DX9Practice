@@ -161,7 +161,9 @@
     <ClCompile Include="SkyBox.cpp">
       <Filter>Object\SkyBox</Filter>
     </ClCompile>
-    <ClCompile Include="TexManager.cpp" />
+    <ClCompile Include="TexManager.cpp">
+      <Filter>Manager\TexManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -213,7 +215,9 @@
     <ClInclude Include="SkyBox.h">
       <Filter>Object\SkyBox</Filter>
     </ClInclude>
-    <ClInclude Include="TexManager.h" />
+    <ClInclude Include="TexManager.h">
+      <Filter>Manager\TexManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>

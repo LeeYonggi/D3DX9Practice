@@ -86,6 +86,7 @@ void MainProc::Release()
 	CameraManager::ReleaseInstance();
 	MeshManager::ReleaseInstance();
 	TexManager::ReleaseInstance();
+	InputManager::ReleaseInstance();
 }
 
 void MainProc::ResetDevice()

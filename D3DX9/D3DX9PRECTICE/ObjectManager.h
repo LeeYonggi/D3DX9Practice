@@ -32,6 +32,7 @@ public:
 
 	Object *AddObject(OBJ_STATE objState, Object *obj);
 	vector<Object*>* GetObjects(OBJ_STATE objState);
+	Object* GetObjectOfState(OBJ_STATE objState);
 };
 
 #define OBJECTMANAGER ObjectManager::GetInstance()

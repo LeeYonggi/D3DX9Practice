@@ -64,8 +64,8 @@ void Player::PlayerMove(float _speed)
 void Player::PlayerRotateMove(D3DXVECTOR2 vec2)
 {
 	TpCamera *tempCam = dynamic_cast<TpCamera*>(CAMERAMANAGER->GetCamera());
-	distance.x = tempCam->GetTargetPos().x - vec2.x;
-	distance.y = tempCam->GetTargetPos().z - vec2.y;
+	distance.x = tempCam->GetAt().x - tempCam->GetEye().x;
+	distance.y = tempCam->GetAt().z - tempCam->GetEye().z;
 
 	rotation.y = D3DXToDegree(-atan2f(distance.y, distance.x)) - 180;
 	D3DXVec2Normalize(&distance, &distance);
