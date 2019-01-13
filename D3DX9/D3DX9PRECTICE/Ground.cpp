@@ -4,7 +4,7 @@
 
 Ground::Ground()
 {
-	scale = { 0.1, 0.1, 0.1 };
+	scale = { 1, 1, 1 };
 	memset(mapArray, 0, sizeof(mapArray));
 
 	for (int i = 0; i < MAPARRAYSIZE; i++)
