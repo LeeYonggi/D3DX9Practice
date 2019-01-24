@@ -148,6 +148,7 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>DXUT.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <AdditionalOptions> %(AdditionalOptions)</AdditionalOptions>
@@ -385,35 +386,68 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Boss.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletFire.cpp" />
     <ClCompile Include="CameraManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="d3dUtility.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Enemy1.cpp" />
+    <ClCompile Include="Enemy2.cpp" />
+    <ClCompile Include="FireEffect.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="HpUI.cpp" />
+    <ClCompile Include="IngameScene.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="LoadScene.cpp" />
     <ClCompile Include="MainProc.cpp" />
     <ClCompile Include="MeshLoader.cpp" />
     <ClCompile Include="MeshManager.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerBody.cpp" />
+    <ClCompile Include="PlayerBottom.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SkyBox.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="TexManager.cpp" />
     <ClCompile Include="TpCamera.cpp" />
+    <ClCompile Include="UI.cpp" />
+    <ClInclude Include="Boss.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletFire.h" />
     <ClInclude Include="CameraManager.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="d3dUtility.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Enemy1.h" />
+    <ClInclude Include="Enemy2.h" />
+    <ClInclude Include="FireEffect.h" />
+    <ClInclude Include="GameManager.h" />
     <ClInclude Include="Ground.h" />
+    <ClInclude Include="HpUI.h" />
+    <ClInclude Include="IngameScene.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LoadScene.h" />
     <ClInclude Include="MeshLoader.h" />
     <ClInclude Include="MeshManager.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerBody.h" />
+    <ClInclude Include="PlayerBottom.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TexManager.h" />
     <ClInclude Include="TpCamera.h" />
+    <ClInclude Include="UI.h" />
     <None Include="DXUT\Optional\directx.ico" />
     <ClInclude Include="DXUT\Core\DXUT.h" />
     <ClInclude Include="DXUT\Core\DXUTenum.h" />

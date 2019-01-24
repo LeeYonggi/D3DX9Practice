@@ -68,3 +68,9 @@ D3DMATERIAL9 d3d::InitMtrl(D3DXCOLOR a, D3DXCOLOR d, D3DXCOLOR s, D3DXCOLOR e, f
 	mtrl.Power = p;
 	return mtrl;
 }
+
+int d3d::getRandomNumber(int min, int max)
+{
+	static const double fraction = 1.0 / (RAND_MAX + 1.0);
+	return min + static_cast<int>((max - min + 1) * (std::rand() * fraction));
+}

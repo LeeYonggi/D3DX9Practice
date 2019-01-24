@@ -60,6 +60,60 @@
     <Filter Include="Manager\TexManager">
       <UniqueIdentifier>{ba6e4050-a124-4afb-b49d-70692a531e94}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{f8a60104-22fa-4e19-9f9b-91407c511ac1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\SceneManager">
+      <UniqueIdentifier>{390a1ec4-c4c8-4228-bf32-1e57035980aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\LoadScene">
+      <UniqueIdentifier>{c39b7a76-09e2-48f5-9308-f007d5f8cb38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\IngameScene">
+      <UniqueIdentifier>{8446b890-7bc9-4544-a30f-e4da329a22ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player\PlayerBody">
+      <UniqueIdentifier>{e8231c66-29ed-4ee2-8014-16cad623332a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player\PlayerBottom">
+      <UniqueIdentifier>{72a970e8-71c0-4d07-8663-d7d8cc2028a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Bullet">
+      <UniqueIdentifier>{f9f2249a-a702-4677-8c8a-0cb51f4743dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\BulletFire">
+      <UniqueIdentifier>{526b341a-652f-415e-8e63-14e33eb3d8a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy">
+      <UniqueIdentifier>{05834866-5b3d-4601-b8a6-1804589488b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Enemy1">
+      <UniqueIdentifier>{4654a9c7-88b9-49cf-8be8-ddae9680edf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Effect">
+      <UniqueIdentifier>{6db76f2c-22e1-4576-915a-83ac66ef8cbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Effect\FireEffect">
+      <UniqueIdentifier>{f154c2be-9226-4a02-963e-8384b9d096cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\UI">
+      <UniqueIdentifier>{15104883-070f-4a45-8bec-71b5dbfac639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\GameManager">
+      <UniqueIdentifier>{ccd28df3-d692-449f-ae70-40b2fc1ad94a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Enemy2">
+      <UniqueIdentifier>{cc9f2615-5675-4732-b6c2-bd73df348ca0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\SoundManager">
+      <UniqueIdentifier>{b7b3c85b-0d83-4553-9a25-00793b9cb32f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Player\HpUI">
+      <UniqueIdentifier>{99783e86-32e0-438f-bf79-fbb6be8518f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Enemy\Boss">
+      <UniqueIdentifier>{cfc4c4ba-6037-435a-8566-7341d04e6b94}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXUT\Optional\directx.ico">
@@ -164,6 +218,54 @@
     <ClCompile Include="TexManager.cpp">
       <Filter>Manager\TexManager</Filter>
     </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Manager\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadScene.cpp">
+      <Filter>Scene\LoadScene</Filter>
+    </ClCompile>
+    <ClCompile Include="IngameScene.cpp">
+      <Filter>Scene\IngameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBody.cpp">
+      <Filter>Object\Player\PlayerBody</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBottom.cpp">
+      <Filter>Object\Player\PlayerBottom</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Object\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="BulletFire.cpp">
+      <Filter>Object\BulletFire</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy1.cpp">
+      <Filter>Object\Enemy\Enemy1</Filter>
+    </ClCompile>
+    <ClCompile Include="FireEffect.cpp">
+      <Filter>Object\Effect\FireEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Object\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Manager\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Object\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy2.cpp">
+      <Filter>Object\Enemy\Enemy2</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>Manager\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="HpUI.cpp">
+      <Filter>Object\Player\HpUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Boss.cpp">
+      <Filter>Object\Enemy\Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CLInclude Include="resource.h">
@@ -217,6 +319,57 @@
     </ClInclude>
     <ClInclude Include="TexManager.h">
       <Filter>Manager\TexManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Manager\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadScene.h">
+      <Filter>Scene\LoadScene</Filter>
+    </ClInclude>
+    <ClInclude Include="IngameScene.h">
+      <Filter>Scene\IngameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBody.h">
+      <Filter>Object\Player\PlayerBody</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerBottom.h">
+      <Filter>Object\Player\PlayerBottom</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Object\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletFire.h">
+      <Filter>Object\BulletFire</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy1.h">
+      <Filter>Object\Enemy\Enemy1</Filter>
+    </ClInclude>
+    <ClInclude Include="FireEffect.h">
+      <Filter>Object\Effect\FireEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Object\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Manager\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Object\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy2.h">
+      <Filter>Object\Enemy\Enemy2</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>Manager\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="HpUI.h">
+      <Filter>Object\Player\HpUI</Filter>
+    </ClInclude>
+    <ClInclude Include="Boss.h">
+      <Filter>Object\Enemy\Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

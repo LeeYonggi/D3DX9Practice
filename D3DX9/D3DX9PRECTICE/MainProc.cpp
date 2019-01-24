@@ -1,11 +1,8 @@
 #include "DXUT.h"
 #include "MainProc.h"
 
-#include "Ground.h"
-#include "Player.h"
-#include "SkyBox.h"
-#include "SkyBox.h"
-
+#include "IngameScene.h"
+#include "LoadScene.h"
 
 MainProc::MainProc()
 {
@@ -37,16 +34,15 @@ void MainProc::Init()
 	*/
 #pragma endregion
 
-
-	OBJECTMANAGER->AddObject(OBJ_BACKGROUND, new SkyBox);
-	OBJECTMANAGER->AddObject(OBJ_BACKGROUND, new Ground);
-	OBJECTMANAGER->AddObject(OBJ_CHARACTER, new Player);
+	SCENEMANAGER->AddScene(new LoadScene);
 }
 
 void MainProc::Update()
 {
 	CAMERAMANAGER->CamUpdate();
-	OBJECTMANAGER->Update();
+
+	SCENEMANAGER->Update();
+	
 	INPUTMANAGER->Update();
 }
 
@@ -77,16 +73,19 @@ void MainProc::Render()
 
 	DEVICE->SetRenderState(D3DRS_LIGHTING, true);
 
-	OBJECTMANAGER->Render();
+	SCENEMANAGER->Render();
 }
 
 void MainProc::Release()
 {
-	ObjectManager::ReleaseInstance();
+	SoundManager::ReleaseInstance();
+	GameManager::ReleaseInstance();
 	CameraManager::ReleaseInstance();
+	InputManager::ReleaseInstance();
+	SceneManager::ReleaseInstance();
+	ObjectManager::ReleaseInstance();
 	MeshManager::ReleaseInstance();
 	TexManager::ReleaseInstance();
-	InputManager::ReleaseInstance();
 }
 
 void MainProc::ResetDevice()

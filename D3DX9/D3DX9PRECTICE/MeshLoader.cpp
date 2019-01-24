@@ -17,6 +17,7 @@ MeshLoader::MeshLoader()
 {
 	m_pd3dDevice = NULL;
 	m_pMesh = NULL;
+	m_Materials = nullptr;
 
 	ZeroMemory(m_strMediaDir, sizeof(m_strMediaDir));
 }
@@ -31,6 +32,7 @@ HRESULT MeshLoader::Create(IDirect3DDevice9 * pd3dDevice, const WCHAR * strFilen
 	HRESULT hr;
 	WCHAR str[MAX_PATH] = { 0 };
 	wstring path = strFilename;
+	m_Materials = new vector<Material*>();
 
 	// Start clean
 	Destroy();
@@ -49,16 +51,16 @@ HRESULT MeshLoader::Create(IDirect3DDevice9 * pd3dDevice, const WCHAR * strFilen
 	SetCurrentDirectory(m_strMediaDir);
 
 	// Load material textures
-	for (int iMaterial = 0; iMaterial < m_Materials.GetSize(); iMaterial++)
+	for (int iMaterial = 0; iMaterial < m_Materials->size(); iMaterial++)
 	{
-		Material* pMaterial = m_Materials.GetAt(iMaterial);
+		Material* pMaterial = (*m_Materials)[iMaterial];
 		if (pMaterial->strTexture[0])
 		{
 			// Avoid loading the same texture twice
 			bool bFound = false;
 			for (int x = 0; x < iMaterial; x++)
 			{
-				Material* pCur = m_Materials.GetAt(x);
+				Material* pCur = (*m_Materials)[x];
 				if (0 == wcscmp(pCur->strTexture.c_str(), pMaterial->strTexture.c_str()))
 				{
 					bFound = true;
@@ -72,8 +74,9 @@ HRESULT MeshLoader::Create(IDirect3DDevice9 * pd3dDevice, const WCHAR * strFilen
 			{
 
 				V_RETURN(DXUTFindDXSDKMediaFileCch(str, MAX_PATH, pMaterial->strTexture.c_str()));
-				V_RETURN(D3DXCreateTextureFromFile(pd3dDevice, pMaterial->strTexture.c_str(),
-					&(pMaterial->pTexture)));
+				string textureName;
+				textureName.assign(pMaterial->strTexture.begin(), pMaterial->strTexture.end());
+				pMaterial->pTexture = TEXMANAGER->AddTexture(textureName, textureName)->tex;
 			}
 		}
 	}
@@ -87,24 +90,25 @@ HRESULT MeshLoader::Create(IDirect3DDevice9 * pd3dDevice, const WCHAR * strFilen
 		D3DXMESH_MANAGED | D3DXMESH_32BIT, VERTEX_DECL,
 		pd3dDevice, &pMesh));
 
+	std::cout << "mesh 로드" << " size: " << m_Vertices.GetSize() << std::endl;
 	// Copy the vertex data
 	VERTEX* pVertex;
 	V_RETURN(pMesh->LockVertexBuffer(0, (void**)&pVertex));
-	memcpy(pVertex, m_Vertices.GetData(), m_Vertices.GetSize() * sizeof(VERTEX));
+	std::memcpy(pVertex, m_Vertices.GetData(), m_Vertices.GetSize() * sizeof(VERTEX));
 	pMesh->UnlockVertexBuffer();
 	m_Vertices.RemoveAll();
 
 	// Copy the index data
 	DWORD* pIndex;
 	V_RETURN(pMesh->LockIndexBuffer(0, (void**)&pIndex));
-	memcpy(pIndex, m_Indices.GetData(), m_Indices.GetSize() * sizeof(DWORD));
+	std::memcpy(pIndex, m_Indices.GetData(), m_Indices.GetSize() * sizeof(DWORD));
 	pMesh->UnlockIndexBuffer();
 	m_Indices.RemoveAll();
 
 	// Copy the attribute data
 	DWORD* pSubset;
 	V_RETURN(pMesh->LockAttributeBuffer(0, &pSubset));
-	memcpy(pSubset, m_Attributes.GetData(), m_Attributes.GetSize() * sizeof(DWORD));
+	std::memcpy(pSubset, m_Attributes.GetData(), m_Attributes.GetSize() * sizeof(DWORD));
 	pMesh->UnlockAttributeBuffer();
 	m_Attributes.RemoveAll();
 
@@ -126,23 +130,6 @@ HRESULT MeshLoader::Create(IDirect3DDevice9 * pd3dDevice, const WCHAR * strFilen
 
 void MeshLoader::Destroy()
 {
-	for (int iMaterial = 0; iMaterial < m_Materials.GetSize(); iMaterial++)
-	{
-		Material* pMaterial = m_Materials.GetAt(iMaterial);
-
-		// Avoid releasing the same texture twice
-		for (int x = iMaterial + 1; x < m_Materials.GetSize(); x++)
-		{
-			Material* pCur = m_Materials.GetAt(x);
-			if (pCur->pTexture == pMaterial->pTexture)
-				pCur->pTexture = NULL;
-		}
-
-		SAFE_RELEASE(pMaterial->pTexture);
-		SAFE_DELETE(pMaterial);
-	}
-
-	m_Materials.RemoveAll();
 	m_Vertices.RemoveAll();
 	m_Indices.RemoveAll();
 	m_Attributes.RemoveAll();
@@ -182,7 +169,7 @@ HRESULT MeshLoader::LoadGeometryFromOBJ(wstring strFilename)
 
 	InitMaterial(pMaterial);
 	wcscpy_s(pMaterial->strName, MAX_PATH - 1, L"default");
-	m_Materials.Add(pMaterial);
+	m_Materials->push_back(pMaterial);
 
 	DWORD dwCurSubset = 0;
 
@@ -287,9 +274,9 @@ HRESULT MeshLoader::LoadGeometryFromOBJ(wstring strFilename)
 			InFile >> strName;
 
 			bool bFound = false;
-			for (int iMaterial = 0; iMaterial < m_Materials.GetSize(); iMaterial++)
+			for (int iMaterial = 0; iMaterial < m_Materials->size(); iMaterial++)
 			{
-				Material* pCurMaterial = m_Materials.GetAt(iMaterial);
+				Material* pCurMaterial = (*m_Materials)[iMaterial];
 				if (0 == wcscmp(pCurMaterial->strName, strName))
 				{
 					bFound = true;
@@ -304,12 +291,12 @@ HRESULT MeshLoader::LoadGeometryFromOBJ(wstring strFilename)
 				if (pMaterial == NULL)
 					return E_OUTOFMEMORY;
 
-				dwCurSubset = m_Materials.GetSize();
+				dwCurSubset = m_Materials->size();
 
 				InitMaterial(pMaterial);
 				wcscpy_s(pMaterial->strName, MAX_PATH - 1, strName);
 
-				m_Materials.Add(pMaterial);
+				m_Materials->push_back(pMaterial);
 			}
 		}
 		else
@@ -320,6 +307,7 @@ HRESULT MeshLoader::LoadGeometryFromOBJ(wstring strFilename)
 		InFile.ignore(1000, '\n');
 	}
 
+	std::cout << "vertex 로드" << " size: " << Positions.GetSize() << endl;
 	// Cleanup
 	InFile.close();
 	DeleteCache();
@@ -327,13 +315,17 @@ HRESULT MeshLoader::LoadGeometryFromOBJ(wstring strFilename)
 	// If an associated material file was found, read that in as well.
 	if (strMaterialFilename[0])
 	{
-		V_RETURN(LoadMaterialsFromMTL(strMaterialFilename.c_str()));
+		wstring tempStr = strFilename;
+		int number = tempStr.rfind('/');
+		tempStr = tempStr.substr(0, number + 1);
+
+		V_RETURN(LoadMaterialsFromMTL(tempStr, strMaterialFilename.c_str()));
 	}
 
 	return S_OK;
 }
 
-HRESULT MeshLoader::LoadMaterialsFromMTL(wstring strFileName)
+HRESULT MeshLoader::LoadMaterialsFromMTL(wstring objFilename, wstring strFileName)
 {
 	HRESULT hr;
 
@@ -347,7 +339,18 @@ HRESULT MeshLoader::LoadMaterialsFromMTL(wstring strFileName)
 	char cstrPath[MAX_PATH];
 	V_RETURN(DXUTFindDXSDKMediaFileCch(strPath, MAX_PATH, strFileName.c_str()));
 	WideCharToMultiByte(CP_ACP, 0, strPath, -1, cstrPath, MAX_PATH, NULL, NULL);
-
+	
+	vector<Material*>* temp = MESHMANAGER->AddMaterial(objFilename, m_Materials);
+	if (temp != nullptr)
+	{
+		for (auto iter : *m_Materials)
+		{
+			SAFE_DELETE(iter);
+		}
+		SAFE_DELETE(m_Materials);
+		m_Materials = temp;
+		return S_OK;
+	}
 	// File input
 	WCHAR strCommand[256] = { 0 };
 	wifstream InFile(cstrPath);
@@ -372,9 +375,9 @@ HRESULT MeshLoader::LoadMaterialsFromMTL(wstring strFileName)
 			InFile >> strName;
 
 			pMaterial = NULL;
-			for (int i = 0; i < m_Materials.GetSize(); i++)
+			for (int i = 0; i < m_Materials->size(); i++)
 			{
-				Material* pCurMaterial = m_Materials.GetAt(i);
+				Material* pCurMaterial = (*m_Materials)[i];
 				if (0 == wcscmp(pCurMaterial->strName, strName))
 				{
 					pMaterial = pCurMaterial;
@@ -417,6 +420,14 @@ HRESULT MeshLoader::LoadMaterialsFromMTL(wstring strFileName)
 		{
 			// Alpha
 			InFile >> pMaterial->fAlpha;
+			pMaterial->fAlpha = 1 - pMaterial->fAlpha;
+		
+		}
+		else if (0 == wcscmp(strCommand, L"Ke"))
+		{
+			float r, g, b;
+			InFile >> r >> g >> b;
+			pMaterial->vEmissive = Vector3(r, g, b);
 		}
 		else if (0 == wcscmp(strCommand, L"Ns"))
 		{
@@ -459,7 +470,7 @@ HRESULT MeshLoader::LoadMaterialsFromMTL(wstring strFileName)
 	}
 
 	InFile.close();
-
+	std::cout << "mtl 로드" << endl;
 	return S_OK;
 }
 

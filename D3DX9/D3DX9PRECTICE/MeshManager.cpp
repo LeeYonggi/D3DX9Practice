@@ -76,10 +76,46 @@ Mesh *MeshManager::AddMesh(string str, string route)
 	return tempMesh;
 }
 
+vector<Material*>* MeshManager::AddMaterial(wstring name, vector<Material*>* mat)
+{
+	auto iter = mMaterial.find(name);
+	if (iter != mMaterial.end()) return iter->second;
+
+	mMaterial.insert(make_pair(name, mat));
+
+	return nullptr;
+}
+
+vector<MeshLoader*> MeshManager::AddObjAnime(string name, wstring route, int low, int high)
+{
+	auto iter = vObjAnime.find(name);
+	if (iter != vObjAnime.end()) return iter->second;
+
+	vector<MeshLoader*> anime;
+
+	for (int i = low; i < high; i++)
+	{
+		string str;
+		wstring wstr = route;
+		char ctr[8];
+		WCHAR wnumber[8];
+
+		wsprintf(wnumber, L"%d", i);
+		wstr = wstr + wnumber + L".obj";
+		sprintf(ctr, "%d", i);
+		str = ctr;
+		anime.push_back(MESHMANAGER->AddObjMesh(name + str, wstr.c_str()));
+	}
+
+	vObjAnime.insert(make_pair(name, anime));
+
+	return anime;
+}
+
 MeshLoader * MeshManager::AddObjMesh(string str, wstring route)
 {
 	auto iter = m_ObjMeshLoader.find(str);
-	if (iter != m_ObjMeshLoader.end()) iter->second;
+	if (iter != m_ObjMeshLoader.end()) return iter->second;
 
 	MeshLoader *temp = new MeshLoader;
 	
@@ -90,22 +126,6 @@ MeshLoader * MeshManager::AddObjMesh(string str, wstring route)
 	return temp;
 }
 
-void MeshManager::CreateBoundingSphere(Mesh *meshinfo, D3DXVECTOR3 *center, float *radius)
-{
-	HRESULT hr;
-	BYTE *v;
-
-	meshinfo->mesh->LockVertexBuffer(0, (void**)&v);
-
-	hr = D3DXComputeBoundingSphere(
-		(D3DXVECTOR3*)v,
-		meshinfo->mesh->GetNumVertices(),
-		D3DXGetFVFVertexSize(meshinfo->mesh->GetFVF()),
-		center,
-		radius);
-
-	meshinfo->mesh->UnlockVertexBuffer();
-}
 void MeshManager::RenderMesh(string str)
 {
 	auto iter = m_Mesh.find(str);
@@ -166,11 +186,79 @@ void MeshManager::RenderMesh(MeshLoader * meshLoader, D3DXVECTOR3 pos, D3DXVECTO
 	DEVICE->SetLight(0, &light);
 	DEVICE->LightEnable(0, true);
 
+	//DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+	//DEVICE->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_BOTHSRCALPHA);
+	//DEVICE->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_BOTHSRCALPHA); //INVSRCALPHA를 쓰면 멋진걸 볼 수 있음
+	//DEVICE->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+
 	DEVICE->SetSamplerState(0, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
 	DEVICE->SetSamplerState(0, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
 	DEVICE->SetRenderState(D3DRS_NORMALIZENORMALS, true);
 	DEVICE->SetRenderState(D3DRS_SPECULARENABLE, true);
 
+
+	for (int i = 0; i < meshLoader->GetNumMaterials(); i++)
+	{
+		D3DMATERIAL9 mtl;
+
+		mtl.Ambient = D3DXCOLOR(meshLoader->GetMaterial(i)->vAmbient.x, meshLoader->GetMaterial(i)->vAmbient.y, meshLoader->GetMaterial(i)->vAmbient.z, meshLoader->GetMaterial(i)->fAlpha);
+		mtl.Diffuse = D3DXCOLOR(meshLoader->GetMaterial(i)->vDiffuse.x, meshLoader->GetMaterial(i)->vDiffuse.y, meshLoader->GetMaterial(i)->vDiffuse.z, meshLoader->GetMaterial(i)->fAlpha);
+		mtl.Specular = D3DXCOLOR(meshLoader->GetMaterial(i)->vSpecular.x, meshLoader->GetMaterial(i)->vSpecular.y, meshLoader->GetMaterial(i)->vSpecular.z, meshLoader->GetMaterial(i)->fAlpha);
+		mtl.Emissive = D3DXCOLOR(meshLoader->GetMaterial(i)->vDiffuse.x, meshLoader->GetMaterial(i)->vDiffuse.y, meshLoader->GetMaterial(i)->vDiffuse.z, meshLoader->GetMaterial(i)->fAlpha);
+		mtl.Power = 1.f;
+
+		DEVICE->SetMaterial(&mtl);
+		DEVICE->SetTexture(0, meshLoader->GetMaterial(i)->pTexture);
+		meshLoader->GetMesh()->DrawSubset(i);
+	}
+}
+
+void MeshManager::RenderAlphaMesh(MeshLoader * meshLoader, D3DXVECTOR3 pos, D3DXVECTOR3 rotation, D3DXVECTOR3 scale)
+{
+	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+	DEVICE->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	DEVICE->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	DEVICE->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_CW);
+	RenderMesh(meshLoader, pos, rotation, scale);
+	DEVICE->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
+	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
+	DEVICE->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_BOTHSRCALPHA);
+	DEVICE->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_BOTHSRCALPHA);
+	DEVICE->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+}
+
+void MeshManager::RenderPlanEffect(MeshLoader * meshLoader, Texture * tex, D3DXVECTOR3 pos, D3DXVECTOR3 rotation, D3DXVECTOR3 scale, D3DXCOLOR color)
+{
+	D3DXMATRIX matW, matS, matRX, matRY, matRZ, matT;
+
+	D3DXMatrixScaling(&matS, scale.x, scale.y, scale.z);
+	D3DXMatrixRotationX(&matRX, D3DXToRadian(rotation.x));
+	D3DXMatrixRotationY(&matRY, D3DXToRadian(rotation.y));
+	D3DXMatrixRotationZ(&matRZ, D3DXToRadian(rotation.z));
+	D3DXMatrixTranslation(&matT, pos.x, pos.y, pos.z);
+
+	matRX = matRX * matRY * matRZ;
+	matW = matS * matRX * matT;
+
+	DEVICE->SetTransform(D3DTS_WORLD, &matW);
+
+	D3DXVECTOR3 dir(1.0f, -1.0f, 1.0f);
+	D3DXCOLOR col(1.0f, 1.0f, 1.0f, 1.0f);
+	D3DLIGHT9 light = d3d::InitDirectionalLight(&dir, &col);
+
+	DEVICE->SetLight(0, &light);
+	DEVICE->LightEnable(0, true);
+
+	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, true);
+	DEVICE->SetRenderState(D3DRS_ZWRITEENABLE, false);
+	DEVICE->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	DEVICE->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA); //INVSRCALPHA를 쓰면 멋진걸 볼 수 있음
+	DEVICE->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+
+	DEVICE->SetFVF(VERTEX::FVF);
 
 	for (int i = 0; i < meshLoader->GetNumMaterials(); i++)
 	{
@@ -183,11 +271,17 @@ void MeshManager::RenderMesh(MeshLoader * meshLoader, D3DXVECTOR3 pos, D3DXVECTO
 		mtl.Power = 1.f;
 
 		DEVICE->SetMaterial(&mtl);
-		DEVICE->SetTexture(0, meshLoader->GetMaterial(i)->pTexture);
+		DEVICE->SetTexture(0, tex->tex);
 		meshLoader->GetMesh()->DrawSubset(i);
 	}
+	DEVICE->SetRenderState(D3DRS_ALPHABLENDENABLE, false);
 
+	DEVICE->SetRenderState(D3DRS_ZWRITEENABLE, true);
+	DEVICE->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_BOTHSRCALPHA);
+	DEVICE->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_BOTHSRCALPHA);
+	DEVICE->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 
+	DEVICE->SetTexture(0, nullptr);
 }
 
 void MeshManager::Release()
@@ -216,10 +310,25 @@ void MeshManager::Release()
 	}
 	m_Mesh.clear();
 
+	for (auto iter : mMaterial)
+	{
+		for (auto _iter : *iter.second)
+		{
+			SAFE_DELETE(_iter);
+		}
+	}
+	mMaterial.clear();
+
 	for (auto iter : m_ObjMeshLoader)
 	{
 		iter.second->Destroy();
 		SAFE_DELETE(iter.second);
 	}
 	m_ObjMeshLoader.clear();
+
+	for (auto iter : vObjAnime)
+	{
+		iter.second.clear();
+	}
+	vObjAnime.clear();
 }

@@ -30,4 +30,6 @@ namespace d3d
 	{
 		return p1 + (p2 - p1) * d;
 	}
+
+	int getRandomNumber(int min, int max);
 }

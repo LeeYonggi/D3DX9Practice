@@ -8,7 +8,8 @@ public:
 	Ground();
 	virtual ~Ground();
 private:
-	int mapArray[MAPARRAYSIZE][MAPARRAYSIZE];
+	Texture *map;
+	Texture *miniMap;
 
 public:
 	void Init()		override;
@@ -16,6 +17,6 @@ public:
 	void Render()	override;
 	void Release()	override;
 
-	D3DXVECTOR2 CollisionToArray(D3DXVECTOR2 target);
+public:
+	Texture *GetMap() { return map; }
 };
-

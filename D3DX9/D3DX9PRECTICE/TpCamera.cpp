@@ -22,8 +22,8 @@ TpCamera::TpCamera(Object * _target)
 
 	targetPos = target->GetPos();
 
-	fixtargetoffset = Vector3(0.4f, 0.5f, -2.0f);
-	fixpivotoffset = Vector3(0.0f, 2.0f, -2.0f);
+	fixtargetoffset = Vector3(1, 3, 0);
+	fixpivotoffset = Vector3(0, 1.6f, -2.0f);
 }
 
 TpCamera::~TpCamera()
@@ -62,16 +62,17 @@ D3DXVECTOR2 TpCamera::GetAxisMouse()
 	deltaCursor.y = cursor.y - center.y;
 
 	current.x += deltaCursor.x * 0.0005f;
-	current.y += deltaCursor.y * 0.0005f;
+	current.y -= deltaCursor.y * 0.0005f;
 
-	if (current.y > D3DX_PI * 0.25f)
+	if (current.y > D3DX_PI)
 	{
-		current.y = D3DX_PI * 0.25f;
+		current.y = D3DX_PI;
 	}
-	if (current.y < -D3DX_PI * 0.25f)
+	if (current.y < 0)
 	{
-		current.y = -D3DX_PI * 0.25f;
+		current.y = 0;
 	}
+	//cout << current.y << endl;
 
 	SetCursorPos(center.x, center.y);
 
@@ -160,17 +161,16 @@ void TpCamera::TargetOffsetCam()
 	GetClientRect(M_HWND, &rect);
 
 	D3DXMATRIX vMat, vMatR;
-	//D3DXVec3TransformCoord(&m_At, &m_At, &matH);
-	Vector3 targetPivot = Vector3(3, 0, 0);
-	D3DXVec3TransformCoord(&targetPivot, &targetPivot, &matH);
-	m_At = targetPos + targetPivot;
-	m_At.y = current.y * D3DX_PI;
+	Vector3 identity = { 2, 0, 0 };
+	D3DXVec3TransformCoord(&identity, &identity, &matV);
+	m_At = identity + targetPos;
+	m_At.y = current.y * 1.5;
 	D3DXMatrixLookAtLH(&vMat, &m_Eye, &m_At, &m_Up);
 
 	DEVICE->SetTransform(D3DTS_VIEW, &vMat);
 
 	D3DXMATRIX matProj;
-	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI * 0.5f, (float)SCREEN_X / (float)SCREEN_Y, 1.0f, 100000.0f);
+	D3DXMatrixPerspectiveFovLH(&matProj, D3DX_PI * 0.3f, (float)SCREEN_X / (float)SCREEN_Y, 1.0f, 100000.0f);
 	DEVICE->SetTransform(D3DTS_PROJECTION, &matProj);
 }
 

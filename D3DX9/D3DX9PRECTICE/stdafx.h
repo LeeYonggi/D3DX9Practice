@@ -17,6 +17,7 @@ using namespace std;
 #define ElTime DXUTGetElapsedTime() * timeScale
 
 typedef D3DXVECTOR3 Vector3;
+typedef D3DXVECTOR2 Vector2;
 extern float timeScale;
 
 //custom
@@ -25,10 +26,15 @@ extern float timeScale;
 #include "MeshLoader.h"
 
 #include "Singleton.h"
+#include "Scene.h"
+#include "SceneManager.h"
 #include "TexManager.h"
 #include "Object.h"
 #include "ObjectManager.h"
 #include "InputManager.h"
+#include "SoundManager.h"
 #include "CameraManager.h"
 #include "MeshManager.h"
+#include "GameManager.h"
+#include "IngameScene.h"
 #include "MainProc.h"

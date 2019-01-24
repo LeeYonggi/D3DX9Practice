@@ -70,17 +70,6 @@ void ObjectManager::Release()
 	
 }
 
-Object * ObjectManager::AddObject(OBJ_STATE objState, Object * obj)
-{
-	auto iter = mObj.find(objState);
-	if (iter == mObj.end()) return nullptr;
-
-	obj->Init();
-	iter->second->push_back(obj);
-	
-	return obj;
-}
-
 vector<Object*>* ObjectManager::GetObjects(OBJ_STATE objState)
 {
 	auto iter = mObj.find(objState);

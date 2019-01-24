@@ -7,6 +7,16 @@
 #include "DXUT.h"
 #include "resource.h"
 
+#ifdef DEBUG
+#ifdef UNICODE
+#pragma comment(linker, "/entry:wWinMainCRTStartup /subsystem:console") 
+#else
+#pragma comment(linker, "/entry:WinMainCRTStartup /subsystem:console") 
+#endif
+#endif // DEBUG
+
+
+
 
 MainProc main;
 float timeScale = 1.0f;
@@ -44,7 +54,7 @@ bool CALLBACK ModifyDeviceSettings( DXUTDeviceSettings* pDeviceSettings, void* p
 HRESULT CALLBACK OnD3D9CreateDevice( IDirect3DDevice9* pd3dDevice, const D3DSURFACE_DESC* pBackBufferSurfaceDesc,
                                      void* pUserContext )
 {
-	//_CrtSetBreakAlloc(62635);
+	//_CrtSetBreakAlloc(877761);
 	main.Init();
     return S_OK;
 }
