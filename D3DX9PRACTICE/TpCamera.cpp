@@ -147,10 +147,6 @@ void TpCamera::TargetOffsetCam()
 	D3DXMatrixRotationX(&matV, -current.y);
 	matV *= matH;
 
-	D3DXQUATERNION camYRotation, aimRotation;
-	D3DXQuaternionRotationMatrix(&camYRotation, &matH);
-	D3DXQuaternionRotationMatrix(&aimRotation, &matV);
-
 	Vector3 noCollisionOffset = fixtargetoffset;
 	Vector3 targetPivotOffset = fixpivotoffset;
 	D3DXVec3TransformCoord(&noCollisionOffset, &noCollisionOffset, &matV);
